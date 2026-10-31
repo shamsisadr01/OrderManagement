@@ -29,10 +29,7 @@
                 throw new ArgumentException("Quantity must be greater than zero.");
 
             Order = order;
-            OrderId = order.Id;
-
             Product = product;
-            ProductId = product.Id;
 
             Quantity = quantity;
             UnitPrice = product.Price;

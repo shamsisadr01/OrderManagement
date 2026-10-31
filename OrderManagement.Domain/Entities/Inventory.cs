@@ -30,7 +30,7 @@ namespace OrderManagement.Domain.Entities
 
             if (Quantity < quantity)
             {
-                throw new InsufficientInventoryException(ProductId,quantity,Quantity);
+                throw new InsufficientInventoryException(ProductId, quantity, Quantity);
             }
 
             Quantity -= quantity;

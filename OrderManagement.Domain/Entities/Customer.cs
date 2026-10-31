@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OrderManagement.Domain.Entities
+﻿namespace OrderManagement.Domain.Entities
 {
     public class Customer : BaseEntity
     {
