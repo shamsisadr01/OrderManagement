@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManagement.Domain.Entities;
+using OrderManagement.Infrastructure.Persistence.Seed;
 
 namespace OrderManagement.Infrastructure.Persistence.Configurations
 {
@@ -31,6 +32,8 @@ namespace OrderManagement.Infrastructure.Persistence.Configurations
                 .WithOne()
                 .HasForeignKey(x => x.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasData(SeedData.Customers);
         }
     }
 }

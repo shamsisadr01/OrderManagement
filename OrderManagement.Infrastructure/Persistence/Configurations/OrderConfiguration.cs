@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManagement.Domain.Entities;
+using OrderManagement.Infrastructure.Persistence.Seed;
 
 namespace OrderManagement.Infrastructure.Persistence.Configurations
 {
@@ -16,8 +17,7 @@ namespace OrderManagement.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.CreatedAt).IsRequired();
 
-            builder.Property(x => x.Status)
-                .HasConversion<string>().HasMaxLength(30).IsRequired();
+            builder.Property(x => x.Status).HasConversion<int>().IsRequired();
 
             builder.Property(x => x.IsDeleted)
                 .IsRequired();

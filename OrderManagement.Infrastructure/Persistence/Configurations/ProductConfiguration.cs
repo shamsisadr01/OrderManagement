@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManagement.Domain.Entities;
+using OrderManagement.Infrastructure.Persistence.Seed;
 
 namespace OrderManagement.Infrastructure.Persistence.Configurations
 {
@@ -25,6 +26,8 @@ namespace OrderManagement.Infrastructure.Persistence.Configurations
                 .HasForeignKey<Inventory>(x => x.ProductId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasData(SeedData.Products);
         }
     }
 }

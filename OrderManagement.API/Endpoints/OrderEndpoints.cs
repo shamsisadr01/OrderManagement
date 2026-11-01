@@ -13,7 +13,7 @@ namespace OrderManagement.API.Endpoints
 
             // Create Order
             group.MapPost("/", async (
-                CreateOrderRequest request,IOrderService orderService,
+                CreateOrderRequest request, IOrderService orderService,
                 CancellationToken cancellationToken) =>
             {
                 var id = await orderService.CreateAsync(
@@ -24,13 +24,13 @@ namespace OrderManagement.API.Endpoints
 
             // Get Order By Id
             group.MapGet("/{id:int}", async (
-                int id,IOrderService orderService, 
+                int id, IOrderService orderService,
                 CancellationToken cancellationToken) =>
             {
                 var order = await orderService.GetByIdAsync(
                     id, cancellationToken);
 
-                return order is null? Results.NotFound(): Results.Ok(order);
+                return order is null ? Results.NotFound() : Results.Ok(order);
             });
 
             // Get All Orders

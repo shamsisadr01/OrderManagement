@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManagement.Domain.Entities;
+using OrderManagement.Infrastructure.Persistence.Seed;
 
 namespace OrderManagement.Infrastructure.Persistence.Configurations
 {
@@ -16,7 +17,9 @@ namespace OrderManagement.Infrastructure.Persistence.Configurations
 
             builder.HasIndex(x => x.ProductId).IsUnique();
 
-            builder.ToTable(table => table.HasCheckConstraint("CK_Inventories_Quantity","\"Quantity\" >= 0"));
+            builder.ToTable(table => table.HasCheckConstraint("CK_Inventories_Quantity", "\"Quantity\" >= 0"));
+
+            builder.HasData(SeedData.Inventories);
         }
     }
 }
