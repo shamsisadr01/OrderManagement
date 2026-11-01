@@ -25,15 +25,11 @@ namespace OrderManagement.Infrastructure.Persistence.Repositories
         }
 
         public async Task<IReadOnlyList<Product>> GetByIdsAsync(
-            IEnumerable<int> ids,
+            List<int> productIds,
             CancellationToken cancellationToken = default)
         {
-            var productIds = ids.Distinct().ToList();
-
             return await _context.Products
-                .Include(p => p.Inventory)
-                .Where(p => productIds.Contains(p.Id))
-                .ToListAsync(cancellationToken);
+                .Include(p => p.Inventory).Where(p => productIds.Contains(p.Id)).ToListAsync(cancellationToken);
         }
     }
 }

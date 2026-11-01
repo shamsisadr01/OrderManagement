@@ -57,8 +57,17 @@ namespace OrderManagement.Domain.Entities
             if (IsDeleted)
                 throw new InvalidOrderStateException("Cannot change the status of a deleted order.");
 
-            if (Status == OrderStatus.Delivered ||
-                newStatus != (OrderStatus)((int)Status + 1))
+
+            // تغییر وضعیت  به جلو و ثابت
+
+            //if (Status == OrderStatus.Delivered ||
+            //    newStatus != (OrderStatus)((int)Status + 1))
+            //{
+            //    throw new InvalidOrderStatusException(Status, newStatus);
+            //}
+
+            //تغییر وضعیت هم به جلو و هم به عقب
+            if (Math.Abs((int)newStatus - (int)Status) != 1)
             {
                 throw new InvalidOrderStatusException(Status, newStatus);
             }

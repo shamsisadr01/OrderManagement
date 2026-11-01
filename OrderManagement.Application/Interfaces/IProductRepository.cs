@@ -6,6 +6,6 @@ namespace OrderManagement.Application.Interfaces
     {
         Task<Product?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
 
-        Task<IReadOnlyList<Product>> GetByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<Product>> GetByIdsAsync(List<int> productIds, CancellationToken cancellationToken = default);
     }
 }

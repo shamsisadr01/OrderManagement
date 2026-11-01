@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCore.BulkExtensions;
+using Microsoft.EntityFrameworkCore;
 using OrderManagement.Application.Interfaces;
 using OrderManagement.Domain.Entities;
 using OrderManagement.Domain.Enums;
@@ -22,10 +23,22 @@ namespace OrderManagement.Infrastructure.Persistence.Repositories
         }
 
         // مشاهده جزئیات سفارش
-        public async Task<Order?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<Order?> GetByIdAsync(
+        int id,
+        bool asNoTracking = true,
+        CancellationToken cancellationToken = default)
         {
-            return await _context.Orders.AsNoTracking()
-                .Include(x => x.Items).FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted, cancellationToken);
+            var query = _context.Orders
+                .Where(x => x.Id == id && !x.IsDeleted);
+
+            if (asNoTracking)
+            {
+                query = query.AsNoTracking()
+                    .Include(x => x.Items)
+                    .ThenInclude(x => x.Product);
+            }
+
+            return await query.FirstOrDefaultAsync(cancellationToken);
         }
 
         // جستجو و فیلتر سفارش‌ها
@@ -69,13 +82,15 @@ namespace OrderManagement.Infrastructure.Persistence.Repositories
         }
 
         // ثبت گروهی سفارش‌ها
-        public async Task AddRangeAsync(
-            IEnumerable<Order> orders,
-            CancellationToken cancellationToken = default)
+        //public async Task AddRangeAsync(IEnumerable<Order> orders, CancellationToken cancellationToken = default)
+        //{
+        //    await _context.BulkInsertAsync(orders, cancellationToken: cancellationToken);
+        //}
+        public async Task AddRangeAsync(IEnumerable<Order> orders, CancellationToken cancellationToken = default)
         {
             await _context.Orders.AddRangeAsync(orders, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
         }
+
 
         // حذف نرم
         public async Task SoftDeleteAsync(int id, CancellationToken cancellationToken = default)

@@ -1,4 +1,5 @@
 ﻿using OrderManagement.Application.Dtos;
+using OrderManagement.Domain.Entities;
 using OrderManagement.Domain.Enums;
 
 namespace OrderManagement.Application.Services
@@ -16,6 +17,11 @@ namespace OrderManagement.Application.Services
             DateTime? endDate,
             int pageNumber,
             int pageSize,
+            CancellationToken cancellationToken = default);
+
+        // Bulk Insert - ایجاد چند سفارش به‌صورت گروهی
+        Task AddRangeAsync(
+            IEnumerable<CreateOrderRequest> orders,
             CancellationToken cancellationToken = default);
 
         Task UpdateStatusAsync(int id, OrderStatus status, CancellationToken cancellationToken = default);

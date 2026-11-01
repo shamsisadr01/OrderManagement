@@ -1,4 +1,5 @@
-﻿using OrderManagement.Application.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using OrderManagement.Application.Dtos;
 using OrderManagement.Application.Services;
 using OrderManagement.Domain.Enums;
 
@@ -10,6 +11,23 @@ namespace OrderManagement.API.Endpoints
         public static IEndpointRouteBuilder MapOrderEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/orders").WithTags("Orders");
+
+
+            group.MapPost("/bulk", async ([FromBody] List<CreateOrderRequest> requests, IOrderService orderService,CancellationToken cancellationToken) =>
+            {
+                await orderService.AddRangeAsync(requests, cancellationToken);
+
+                return Results.Ok(new
+                {
+                    success = true,
+                    message = "All orders were created successfully."
+                });
+            })
+            .WithName("CreateMultipleOrders")
+            .WithSummary("Create multiple orders")
+            .WithDescription("Creates multiple orders in a single transaction.")
+            .Produces(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest);
 
             // Create Order
             group.MapPost("/", async (

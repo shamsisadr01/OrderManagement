@@ -24,7 +24,7 @@ namespace OrderManagement.Application.Dtos
 
         public DateTime CreatedAt { get; set; }
 
-        public OrderStatus Status { get; set; }
+        public string Status { get; set; }
 
         public decimal TotalAmount { get; set; }
 

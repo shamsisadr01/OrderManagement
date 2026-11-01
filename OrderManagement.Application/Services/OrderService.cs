@@ -10,11 +10,13 @@ namespace OrderManagement.Application.Services
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IOrderRepository orderRepository, IProductRepository productRepository)
+        public OrderService(IOrderRepository orderRepository, IProductRepository productRepository, IUnitOfWork unitOfWork)
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<int> CreateAsync(
@@ -47,7 +49,7 @@ namespace OrderManagement.Application.Services
             CancellationToken cancellationToken = default)
         {
             var order = await _orderRepository.GetByIdAsync(
-                id, cancellationToken);
+                id,true, cancellationToken);
 
             return order is null ? null : MapToResponse(order);
         }
@@ -76,13 +78,11 @@ namespace OrderManagement.Application.Services
         public async Task UpdateStatusAsync(int id, OrderStatus status, CancellationToken cancellationToken = default)
         {
             var order = await _orderRepository.GetByIdAsync(
-                id, cancellationToken);
+                id,false, cancellationToken);
 
             if (order is null)
                 throw new OrderNotFoundException(
                     $"Order {id} not found.");
-
-            order.ChangeStatus(status);
 
             await _orderRepository.UpdateStatusAsync(
                 order, status, cancellationToken);
@@ -98,6 +98,68 @@ namespace OrderManagement.Application.Services
             return _orderRepository.HardDeleteAsync(id, cancellationToken);
         }
 
+        public async Task AddRangeAsync(IEnumerable<CreateOrderRequest> orders, CancellationToken cancellationToken = default)
+        {
+            var requests = orders.ToList();
+
+            if (requests.Count == 0)
+                return;
+
+            await _unitOfWork.ExecuteInTransactionAsync(async ct =>
+            {
+
+                var productIds = requests
+                .SelectMany(x => x.Items)
+                .Select(x => x.ProductId)
+                .Distinct()
+                .ToList();
+
+                var products = await _productRepository.GetByIdsAsync(productIds, ct);
+
+                var productDictionary = products.ToDictionary(x => x.Id);
+
+
+                var requiredQuantities = requests
+                    .SelectMany(x => x.Items)
+                    .GroupBy(x => x.ProductId)
+                    .ToDictionary(
+                      x => x.Key,
+                      x => x.Sum(item => item.Quantity));
+
+                // بررسی و کاهش موجودی
+                foreach (var item in requiredQuantities)
+                {
+                    if (!productDictionary.TryGetValue(item.Key, out var product))
+                        throw new ProductNotFoundException($"Product {item.Key} not found.");
+
+                    product.Inventory.Decrease(item.Value);
+                }
+
+                // ساخت سفارش‌ها
+                var orderEntities = new List<Order>();
+
+                foreach (var request in requests)
+                {
+                    var order = new Order(request.CustomerId);
+
+                    foreach (var item in request.Items)
+                    {
+                        var product = productDictionary[item.ProductId];
+                        order.AddItem(product, item.Quantity);
+                    }
+
+                    orderEntities.Add(order);
+                }
+
+                // ذخیره گروهی سفارش‌ها
+                await _orderRepository.AddRangeAsync(orderEntities, ct);
+
+                await _unitOfWork.SaveChangesAsync(ct);
+
+            },cancellationToken);
+
+        }
+
         private static OrderResponse MapToResponse(Order order)
         {
             return new OrderResponse
@@ -105,7 +167,7 @@ namespace OrderManagement.Application.Services
                 Id = order.Id,
                 CustomerId = order.CustomerId,
                 CreatedAt = order.CreatedAt,
-                Status = order.Status,
+                Status = order.Status.ToString(),
                 TotalAmount = order.TotalAmount,
 
                 Items = order.Items.Select(item => new OrderItemResponse
@@ -118,5 +180,7 @@ namespace OrderManagement.Application.Services
                 }).ToList()
             };
         }
+
+       
     }
 }
