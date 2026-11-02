@@ -18,7 +18,8 @@ namespace OrderManagement.Infrastructure.Persistence.Seed
             Inventories = GenerateInventories();
         }
 
-        private const string SeedPasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH";
+        //123456
+        private const string SeedPasswordHash = "AQAAAAIAAYagAAAAEM1a5S7x9V87lAUdVGyprjXmXQkHP+nRfkUslEzc9UZU8WKjN9mryHsn7Dc0tcNNLQ==";
         private static readonly Faker EnglishFaker;
         private static readonly Faker PersianFaker;
 

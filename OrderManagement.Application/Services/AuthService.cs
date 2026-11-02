@@ -19,8 +19,7 @@ namespace OrderManagement.Infrastructure.Security
             _jwtTokenService = jwtTokenService;
         }
 
-        public async Task<LoginResponse> LoginAsync(
-            LoginRequest request,
+        public async Task<LoginResponse> LoginAsync(LoginRequest request,
             CancellationToken cancellationToken = default)
         {
             var customer = await _customerRepository.GetByEmailAsync(

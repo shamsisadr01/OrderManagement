@@ -1,6 +1,7 @@
 ﻿
 using OrderManagement.Application.Dtos.Auth;
 using OrderManagement.Application.Interfaces;
+using System.Security.Claims;
 
 namespace OrderManagement.API.Endpoints
 {
@@ -9,8 +10,7 @@ namespace OrderManagement.API.Endpoints
         public static IEndpointRouteBuilder MapAuthEndpoints(
             this IEndpointRouteBuilder app)
         {
-            var group = app.MapGroup("/api/auth")
-                .WithTags("Authentication");
+            var group = app.MapGroup("/api/auth").WithTags("Authentication");
 
             group.MapPost("/login", async (
                 LoginRequest request,
@@ -35,14 +35,9 @@ namespace OrderManagement.API.Endpoints
 
             group.MapGet("/me", (HttpContext context) =>
             {
-                var userId = context.User.FindFirst(
-                    System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-
-                var email = context.User.FindFirst(
-                    System.Security.Claims.ClaimTypes.Email)?.Value;
-
-                var role = context.User.FindFirst(
-                    System.Security.Claims.ClaimTypes.Role)?.Value;
+                var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var email = context.User.FindFirst(ClaimTypes.Email)?.Value;
+                var role = context.User.FindFirst(ClaimTypes.Role)?.Value;
 
                 return Results.Ok(new
                 {
