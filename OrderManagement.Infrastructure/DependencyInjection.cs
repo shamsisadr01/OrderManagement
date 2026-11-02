@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrderManagement.Application.Interfaces;
 using OrderManagement.Infrastructure.Persistence;
 using OrderManagement.Infrastructure.Persistence.Repositories;
+using OrderManagement.Infrastructure.Security;
 
 namespace OrderManagement.Infrastructure
 {
@@ -16,6 +17,10 @@ namespace OrderManagement.Infrastructure
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddScoped<IPasswordService, PasswordService>();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
 
             return services;
         }

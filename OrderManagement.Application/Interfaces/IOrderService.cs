@@ -1,7 +1,7 @@
 ﻿using OrderManagement.Application.Dtos;
 using OrderManagement.Domain.Enums;
 
-namespace OrderManagement.Application.Services
+namespace OrderManagement.Application.Interfaces
 {
     public interface IOrderService
     {

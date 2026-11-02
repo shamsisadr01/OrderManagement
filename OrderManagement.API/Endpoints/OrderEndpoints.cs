@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Application.Dtos;
-using OrderManagement.Application.Services;
+using OrderManagement.Application.Interfaces;
 using OrderManagement.Domain.Enums;
 
 namespace OrderManagement.API.Endpoints
@@ -10,7 +10,7 @@ namespace OrderManagement.API.Endpoints
     {
         public static IEndpointRouteBuilder MapOrderEndpoints(this IEndpointRouteBuilder app)
         {
-            var group = app.MapGroup("/api/orders").WithTags("Orders");
+            var group = app.MapGroup("/api/orders").WithTags("Orders").RequireAuthorization();
 
 
             group.MapPost("/bulk", async ([FromBody] List<CreateOrderRequest> requests, IOrderService orderService, CancellationToken cancellationToken) =>
@@ -109,7 +109,7 @@ namespace OrderManagement.API.Endpoints
                     id, cancellationToken);
 
                 return Results.NoContent();
-            });
+            }).RequireAuthorization(policy =>policy.RequireRole("Admin"));
 
             return app;
         }

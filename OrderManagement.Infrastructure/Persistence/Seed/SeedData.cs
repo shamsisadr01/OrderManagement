@@ -1,4 +1,6 @@
 ﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
+using OrderManagement.Domain.Enums;
 
 namespace OrderManagement.Infrastructure.Persistence.Seed
 {
@@ -16,6 +18,7 @@ namespace OrderManagement.Infrastructure.Persistence.Seed
             Inventories = GenerateInventories();
         }
 
+        private const string SeedPasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH";
         private static readonly Faker EnglishFaker;
         private static readonly Faker PersianFaker;
 
@@ -33,7 +36,10 @@ namespace OrderManagement.Infrastructure.Persistence.Seed
                     Id = i,
                     FirstName = PersianFaker.Name.FirstName(),
                     LastName = PersianFaker.Name.LastName(),
-                    Email = $"{EnglishFaker.Name.FullName().ToLower().Replace(" ", ".")}{i}@{EnglishFaker.Internet.DomainName()}"
+                    Email = $"{EnglishFaker.Name.FullName().ToLower().Replace(" ", ".")}{i}@{EnglishFaker.Internet.DomainName()}",
+                   
+                    PasswordHash = SeedPasswordHash,
+                    Role = UserRole.Customer
                 })
                 .Cast<object>()
                 .ToArray();
@@ -65,4 +71,5 @@ namespace OrderManagement.Infrastructure.Persistence.Seed
                 .ToArray();
         }
     }
+
 }

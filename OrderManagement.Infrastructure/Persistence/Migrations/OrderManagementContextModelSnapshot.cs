@@ -45,6 +45,14 @@ namespace OrderManagement.Infrastructure.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
@@ -58,350 +66,450 @@ namespace OrderManagement.Infrastructure.Persistence.Migrations
                             Id = 1,
                             Email = "onie.langosh1@phyllis.net",
                             FirstName = "آنوشا",
-                            LastName = "علم"
+                            LastName = "علم",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 2,
                             Email = "devante.lakin2@daren.info",
                             FirstName = "پرناز",
-                            LastName = "میرزاده"
+                            LastName = "میرزاده",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 3,
                             Email = "briana.robel3@cleora.org",
                             FirstName = "جهان",
-                            LastName = "عالی"
+                            LastName = "عالی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 4,
                             Email = "beau.lehner4@florine.net",
                             FirstName = "مینو",
-                            LastName = "کرمانی"
+                            LastName = "کرمانی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 5,
                             Email = "moshe.rogahn5@gordon.biz",
                             FirstName = "فرید",
-                            LastName = "معارف"
+                            LastName = "معارف",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 6,
                             Email = "joseph.kuhic6@dennis.net",
                             FirstName = "گلبرگ",
-                            LastName = "فریاد"
+                            LastName = "فریاد",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 7,
                             Email = "isaiah.kuhlman7@merle.info",
                             FirstName = "آبتین",
-                            LastName = "مجتبایی"
+                            LastName = "مجتبایی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 8,
                             Email = "lorine.grimes8@friedrich.org",
                             FirstName = "دلکش",
-                            LastName = "قهرمان"
+                            LastName = "قهرمان",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 9,
                             Email = "luis.morissette9@ila.info",
                             FirstName = "پولاد",
-                            LastName = "نیلوفری"
+                            LastName = "نیلوفری",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 10,
                             Email = "merle.bergstrom10@tomas.biz",
                             FirstName = "آزاده",
-                            LastName = "محمدرضایی"
+                            LastName = "محمدرضایی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 11,
                             Email = "eusebio.armstrong11@reed.com",
                             FirstName = "بردیا",
-                            LastName = "گل محمدی"
+                            LastName = "گل محمدی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 12,
                             Email = "octavia.hickle12@myrna.net",
                             FirstName = "نازچهر",
-                            LastName = "میردامادی"
+                            LastName = "میردامادی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 13,
                             Email = "luther.o'hara13@destiny.com",
                             FirstName = "شاهدخت",
-                            LastName = "کلباسی"
+                            LastName = "کلباسی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 14,
                             Email = "demario.thompson14@kiana.name",
                             FirstName = "اوستا",
-                            LastName = "قهرمانی"
+                            LastName = "قهرمانی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 15,
                             Email = "odessa.aufderhar15@jackie.net",
                             FirstName = "کارو",
-                            LastName = "علم"
+                            LastName = "علم",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 16,
                             Email = "kavon.goldner16@giovanny.biz",
                             FirstName = "اشکان",
-                            LastName = "هروی"
+                            LastName = "هروی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 17,
                             Email = "jalon.morissette17@hermann.name",
                             FirstName = "بهتاش",
-                            LastName = "قانعی"
+                            LastName = "قانعی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 18,
                             Email = "beth.watsica18@charley.com",
                             FirstName = "باپوک",
-                            LastName = "نقیب‌زاده"
+                            LastName = "نقیب‌زاده",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 19,
                             Email = "drew.nicolas19@zaria.name",
                             FirstName = "مهوش",
-                            LastName = "کمالی"
+                            LastName = "کمالی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 20,
                             Email = "rosario.schinner20@harrison.net",
                             FirstName = "نیک خواه",
-                            LastName = "فریاد"
+                            LastName = "فریاد",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 21,
                             Email = "dortha.bechtelar21@ellsworth.net",
                             FirstName = "داریا",
-                            LastName = "نیلوفری"
+                            LastName = "نیلوفری",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 22,
                             Email = "willy.hermann22@kane.com",
                             FirstName = "پروانه",
-                            LastName = "فرامرزی"
+                            LastName = "فرامرزی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 23,
                             Email = "sabina.moore23@percy.net",
                             FirstName = "کامراوا",
-                            LastName = "لاهوتی"
+                            LastName = "لاهوتی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 24,
                             Email = "skyla.prosacco24@celestine.com",
                             FirstName = "سیمین",
-                            LastName = "ملک"
+                            LastName = "ملک",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 25,
                             Email = "tristian.upton25@ewell.biz",
                             FirstName = "شاهپور",
-                            LastName = "گلپایگانی"
+                            LastName = "گلپایگانی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 26,
                             Email = "romaine.ratke26@fred.name",
                             FirstName = "شب بو",
-                            LastName = "کاکاوند"
+                            LastName = "کاکاوند",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 27,
                             Email = "joe.hahn27@ophelia.com",
                             FirstName = "ساره",
-                            LastName = "عبدالکریمی"
+                            LastName = "عبدالکریمی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 28,
                             Email = "rod.goodwin28@albert.name",
                             FirstName = "باپوک",
-                            LastName = "مجتهد شبستری"
+                            LastName = "مجتهد شبستری",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 29,
                             Email = "heber.bogan29@freddy.net",
                             FirstName = "مژگان",
-                            LastName = "کاکاوند"
+                            LastName = "کاکاوند",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 30,
                             Email = "marianna.donnelly30@lester.org",
                             FirstName = "میترا",
-                            LastName = "محمدی"
+                            LastName = "محمدی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 31,
                             Email = "rene.schoen31@susie.biz",
                             FirstName = "مینو فر",
-                            LastName = "قاضی"
+                            LastName = "قاضی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 32,
                             Email = "audreanne.graham32@delores.net",
                             FirstName = "پریدخت",
-                            LastName = "هاشمی رفسنجانی"
+                            LastName = "هاشمی رفسنجانی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 33,
                             Email = "simone.torp33@liana.net",
                             FirstName = "دانوش",
-                            LastName = "عنایت"
+                            LastName = "عنایت",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 34,
                             Email = "gregg.jacobson34@bradford.com",
                             FirstName = "خرمدخت",
-                            LastName = "فتاحی"
+                            LastName = "فتاحی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 35,
                             Email = "valentin.botsford35@ryder.net",
                             FirstName = "ماندانا",
-                            LastName = "کریمی"
+                            LastName = "کریمی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 36,
                             Email = "hazel.murazik36@isaias.name",
                             FirstName = "نگین",
-                            LastName = "فتاحی"
+                            LastName = "فتاحی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 37,
                             Email = "laisha.moore37@berneice.com",
                             FirstName = "تاباندخت",
-                            LastName = "قنبری"
+                            LastName = "قنبری",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 38,
                             Email = "anjali.o'kon38@ricky.biz",
                             FirstName = "شباهنگ",
-                            LastName = "مجتهدی"
+                            LastName = "مجتهدی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 39,
                             Email = "tom.abbott39@vern.info",
                             FirstName = "مهین دخت",
-                            LastName = "هومن"
+                            LastName = "هومن",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 40,
                             Email = "brandi.schiller40@amara.name",
                             FirstName = "شهرناز",
-                            LastName = "لنکرانی"
+                            LastName = "لنکرانی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 41,
                             Email = "alivia.gorczany41@gerda.com",
                             FirstName = "دنیا",
-                            LastName = "عقیلی"
+                            LastName = "عقیلی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 42,
                             Email = "marco.hilll42@maximillian.info",
                             FirstName = "زونا",
-                            LastName = "معروف"
+                            LastName = "معروف",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 43,
                             Email = "anabel.gorczany43@verla.name",
                             FirstName = "بارمان",
-                            LastName = "معروف"
+                            LastName = "معروف",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 44,
                             Email = "justine.prosacco44@dayna.org",
                             FirstName = "هور",
-                            LastName = "علیا"
+                            LastName = "علیا",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 45,
                             Email = "corine.wisozk45@burley.org",
                             FirstName = "نرمین",
-                            LastName = "هاشمی رفسنجانی"
+                            LastName = "هاشمی رفسنجانی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 46,
                             Email = "danny.bayer46@etha.com",
                             FirstName = "سوبار",
-                            LastName = "کهنمویی"
+                            LastName = "کهنمویی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 47,
                             Email = "bette.wunsch47@elwin.biz",
                             FirstName = "باربد",
-                            LastName = "فرامرزی"
+                            LastName = "فرامرزی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 48,
                             Email = "donato.mckenzie48@taya.biz",
                             FirstName = "فرهود",
-                            LastName = "مجتبوی"
+                            LastName = "مجتبوی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 49,
                             Email = "joannie.kuvalis49@rey.org",
                             FirstName = "سرافراز",
-                            LastName = "فرهنگ"
+                            LastName = "فرهنگ",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         },
                         new
                         {
                             Id = 50,
                             Email = "rhianna.corwin50@gillian.info",
                             FirstName = "آرش",
-                            LastName = "مستوفی"
+                            LastName = "مستوفی",
+                            PasswordHash = "YOUR_PREGENERATED_PASSWORD_HASH",
+                            Role = 1
                         });
                 });
 

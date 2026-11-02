@@ -21,6 +21,14 @@ namespace OrderManagement.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.Property(x => x.PasswordHash)
+             .IsRequired()
+             .HasMaxLength(500);
+
+            builder.Property(x => x.Role)
+                .IsRequired()
+                .HasConversion<int>();
+
             builder.Property(x => x.Email)
                 .IsRequired()
                 .HasMaxLength(256);
