@@ -49,7 +49,7 @@ namespace OrderManagement.Application.Services
             CancellationToken cancellationToken = default)
         {
             var order = await _orderRepository.GetByIdAsync(
-                id,true, cancellationToken);
+                id, true, cancellationToken);
 
             return order is null ? null : MapToResponse(order);
         }
@@ -78,7 +78,7 @@ namespace OrderManagement.Application.Services
         public async Task UpdateStatusAsync(int id, OrderStatus status, CancellationToken cancellationToken = default)
         {
             var order = await _orderRepository.GetByIdAsync(
-                id,false, cancellationToken);
+                id, false, cancellationToken);
 
             if (order is null)
                 throw new OrderNotFoundException(
@@ -105,7 +105,7 @@ namespace OrderManagement.Application.Services
             if (requests.Count == 0)
                 return;
 
-            await _unitOfWork.ExecuteInTransactionAsync(async ct =>
+            await _unitOfWork.ExecuteInTransactionAsync(async (dbtrans, ct) =>
             {
 
                 var productIds = requests
@@ -151,12 +151,9 @@ namespace OrderManagement.Application.Services
                     orderEntities.Add(order);
                 }
 
-                // ذخیره گروهی سفارش‌ها
                 await _orderRepository.AddRangeAsync(orderEntities, ct);
 
-                await _unitOfWork.SaveChangesAsync(ct);
-
-            },cancellationToken);
+            }, cancellationToken);
 
         }
 
@@ -181,6 +178,6 @@ namespace OrderManagement.Application.Services
             };
         }
 
-       
+
     }
 }

@@ -13,7 +13,7 @@ namespace OrderManagement.API.Endpoints
             var group = app.MapGroup("/api/orders").WithTags("Orders");
 
 
-            group.MapPost("/bulk", async ([FromBody] List<CreateOrderRequest> requests, IOrderService orderService,CancellationToken cancellationToken) =>
+            group.MapPost("/bulk", async ([FromBody] List<CreateOrderRequest> requests, IOrderService orderService, CancellationToken cancellationToken) =>
             {
                 await orderService.AddRangeAsync(requests, cancellationToken);
 

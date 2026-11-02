@@ -1,6 +1,4 @@
-﻿using OrderManagement.Domain.Enums;
-
-namespace OrderManagement.Application.Dtos
+﻿namespace OrderManagement.Application.Dtos
 {
     public class CreateOrderRequest
     {

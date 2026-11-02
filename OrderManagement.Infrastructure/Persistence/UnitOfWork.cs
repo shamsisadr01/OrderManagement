@@ -1,7 +1,6 @@
-﻿using OrderManagement.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using OrderManagement.Application.Interfaces;
+using System.Data.Common;
 
 namespace OrderManagement.Infrastructure.Persistence
 {
@@ -20,14 +19,18 @@ namespace OrderManagement.Infrastructure.Persistence
         }
 
         public async Task ExecuteInTransactionAsync(
-            Func<CancellationToken, Task> operation,CancellationToken cancellationToken = default)
+            Func<DbTransaction, CancellationToken, Task> operation, CancellationToken cancellationToken = default)
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync( cancellationToken);
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
 
             try
             {
-                await operation(cancellationToken);
 
+                var dbTransaction = transaction.GetDbTransaction();
+
+                await operation(dbTransaction, cancellationToken);
+
+                await SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
             }
             catch
@@ -37,5 +40,7 @@ namespace OrderManagement.Infrastructure.Persistence
                 throw;
             }
         }
+
+
     }
 }

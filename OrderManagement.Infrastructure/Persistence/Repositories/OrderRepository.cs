@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OrderManagement.Application.Interfaces;
 using OrderManagement.Domain.Entities;
 using OrderManagement.Domain.Enums;
+using System.Data.Common;
 
 namespace OrderManagement.Infrastructure.Persistence.Repositories
 {
@@ -82,10 +83,18 @@ namespace OrderManagement.Infrastructure.Persistence.Repositories
         }
 
         // ثبت گروهی سفارش‌ها
-        //public async Task AddRangeAsync(IEnumerable<Order> orders, CancellationToken cancellationToken = default)
-        //{
-        //    await _context.BulkInsertAsync(orders, cancellationToken: cancellationToken);
-        //}
+        public async Task AddRangeAsync(IEnumerable<Order> orders, DbTransaction dbTransaction, CancellationToken cancellationToken = default)
+        {
+            await _context.BulkInsertAsync(orders, new BulkConfig
+            {
+                BatchSize = 2000,
+                SetOutputIdentity = false,
+                UseTempDB = false,
+                SqlBulkCopyOptions = SqlBulkCopyOptions.Default,
+                UnderlyingTransaction = _ => dbTransaction
+            }, cancellationToken: cancellationToken);
+        }
+
         public async Task AddRangeAsync(IEnumerable<Order> orders, CancellationToken cancellationToken = default)
         {
             await _context.Orders.AddRangeAsync(orders, cancellationToken);

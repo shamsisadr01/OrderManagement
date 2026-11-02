@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Data.Common;
 
 namespace OrderManagement.Application.Interfaces
 {
@@ -10,7 +8,7 @@ namespace OrderManagement.Application.Interfaces
             CancellationToken cancellationToken = default);
 
         Task ExecuteInTransactionAsync(
-            Func<CancellationToken, Task> operation,
+            Func<DbTransaction, CancellationToken, Task> operation,
             CancellationToken cancellationToken = default);
     }
 }

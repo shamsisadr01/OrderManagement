@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManagement.Domain.Entities;
-using OrderManagement.Infrastructure.Persistence.Seed;
 
 namespace OrderManagement.Infrastructure.Persistence.Configurations
 {

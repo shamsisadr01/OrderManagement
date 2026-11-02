@@ -1,5 +1,4 @@
 ﻿using OrderManagement.Application.Dtos;
-using OrderManagement.Domain.Entities;
 using OrderManagement.Domain.Enums;
 
 namespace OrderManagement.Application.Services

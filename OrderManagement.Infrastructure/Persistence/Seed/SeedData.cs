@@ -46,7 +46,7 @@ namespace OrderManagement.Infrastructure.Persistence.Seed
                 {
                     Id = i,
                     Name = PersianFaker.Commerce.ProductName(),
-                    Price = Math.Round( PersianFaker.Random.Decimal(100000, 50000000), 2)
+                    Price = Math.Round(PersianFaker.Random.Decimal(100000, 50000000), 2)
                 })
                 .Cast<object>()
                 .ToArray();

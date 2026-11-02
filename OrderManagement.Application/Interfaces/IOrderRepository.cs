@@ -1,5 +1,6 @@
 ﻿using OrderManagement.Domain.Entities;
 using OrderManagement.Domain.Enums;
+using System.Data.Common;
 
 namespace OrderManagement.Application.Interfaces
 {
@@ -19,6 +20,7 @@ namespace OrderManagement.Application.Interfaces
         Task UpdateStatusAsync(Order order, OrderStatus status, CancellationToken cancellationToken = default);
 
         // برای متد از این پکیج استفاده شده است EFCore.BulkExtensions.SqlServer
+        Task AddRangeAsync(IEnumerable<Order> orders, DbTransaction dbTransaction, CancellationToken cancellationToken = default);
         Task AddRangeAsync(IEnumerable<Order> orders, CancellationToken cancellationToken = default);
 
         Task SoftDeleteAsync(int id, CancellationToken cancellationToken = default);
