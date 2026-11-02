@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using OrderManagement.API.Endpoints;
+using OrderManagement.API.Middlewares;
 using OrderManagement.Application;
 using OrderManagement.Infrastructure;
 using OrderManagement.Infrastructure.Persistence.Seed;
@@ -95,6 +96,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSerilogRequestLogging();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
